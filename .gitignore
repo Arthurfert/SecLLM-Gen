@@ -1,0 +1,45 @@
+# Environnement Python
+venv/
+env/
+**/env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+
+dist/
+build/
+
+# Scripts générés
+scripts/
+
+# React/Frontend
+frontend/node_modules/
+frontend/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Environnement
+.env
+.env.local
+
+# Bases de données
+*.db
+chroma_db/
