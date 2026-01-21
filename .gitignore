@@ -43,3 +43,6 @@ desktop.ini
 # Bases de données
 *.db
 chroma_db/
+
+#Rag data
+CVE_info_rag/
