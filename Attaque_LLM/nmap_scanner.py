@@ -15,7 +15,7 @@ def detect_ssl_ports(target_ip: str, port_range: str = "1-10000") -> list:
     Returns:
         list: Liste des ports SSL/TLS détectés
     """
-    print(f"\n🔍 Détection des ports SSL/TLS sur {target_ip}...")
+    print(f"\n Détection des ports SSL/TLS sur {target_ip}...")
     print(f"   Plage de ports: {port_range}")
     
     if not check_nmap_installed():
@@ -47,20 +47,20 @@ def detect_ssl_ports(target_ip: str, port_range: str = "1-10000") -> list:
                     port_num = int(line.split('/')[0].strip())
                     service = line.split()[2] if len(line.split()) > 2 else "unknown"
                     ssl_ports.append(port_num)
-                    print(f"   ✓ Port SSL/TLS détecté: {port_num} ({service})")
+                    print(f"    Port SSL/TLS détecté: {port_num} ({service})")
         
         if ssl_ports:
-            print(f"\n✅ {len(ssl_ports)} port(s) SSL/TLS détecté(s): {', '.join(map(str, ssl_ports))}")
+            print(f"\n {len(ssl_ports)} port(s) SSL/TLS détecté(s): {', '.join(map(str, ssl_ports))}")
         else:
-            print(f"\n⚠️  Aucun port SSL/TLS détecté")
+            print(f"\n  Aucun port SSL/TLS détecté")
         
         return ssl_ports
     
     except subprocess.TimeoutExpired:
-        print("❌ Timeout lors de la détection des ports SSL")
+        print(" Timeout lors de la détection des ports SSL")
         return []
     except Exception as e:
-        print(f"❌ Erreur lors de la détection: {e}")
+        print(f" Erreur lors de la détection: {e}")
         return []
 
 
@@ -78,18 +78,18 @@ def scan_for_heartbleed(target_ip: str, ports: list = None) -> dict:
     """
     # Si aucun port spécifié, détecter les ports SSL/TLS
     if ports is None:
-        print(f"\n🎯 Mode: Détection automatique des ports SSL/TLS")
+        print(f"\n Mode: Détection automatique des ports SSL/TLS")
         ports = detect_ssl_ports(target_ip)
         
         if not ports:
-            print("\n⚠️  Aucun port SSL/TLS détecté. Voulez-vous scanner les ports communs quand même?")
+            print("\n  Aucun port SSL/TLS détecté. Voulez-vous scanner les ports communs quand même?")
             fallback = input("   Scanner les ports 443, 8443, 4433? (o/N): ").strip().lower()
             if fallback in ['o', 'oui', 'y', 'yes']:
                 ports = [443, 8443, 4433]
             else:
                 return {}
     
-    print(f"\n🔍 Test Heartbleed sur {target_ip}...")
+    print(f"\n Test Heartbleed sur {target_ip}...")
     print(f"   Ports testés: {', '.join(map(str, ports))}")
     print(f"   Script NSE: ssl-heartbleed")
     
@@ -127,10 +127,10 @@ def scan_for_heartbleed(target_ip: str, ports: list = None) -> dict:
         return open_ports
     
     except subprocess.TimeoutExpired:
-        print("❌ Timeout du scan Nmap")
+        print(" Timeout du scan Nmap")
         return None
     except Exception as e:
-        print(f"❌ Erreur lors du scan Nmap: {e}")
+        print(f" Erreur lors du scan Nmap: {e}")
         return None
 
 
@@ -147,7 +147,7 @@ def scan_ports_nmap(target_ip: str, ports: list, nse_script: str = None) -> dict
     Returns:
         dict: Résultats du scan {port: {status, service, vulnerable}}
     """
-    print(f"\n🔍 Scan Nmap en cours sur {target_ip}...")
+    print(f"\n Scan Nmap en cours sur {target_ip}...")
     print(f"   Ports ciblés: {', '.join(map(str, ports))}")
     
     if nse_script:
@@ -187,20 +187,20 @@ def scan_ports_nmap(target_ip: str, ports: list, nse_script: str = None) -> dict
         
         # Afficher les résultats
         if open_ports:
-            print(f"\n✅ Ports ouverts détectés:")
+            print(f"\n Ports ouverts détectés:")
             for port, info in open_ports.items():
                 vuln_status = ""
                 if info.get("vulnerable") is True:
-                    vuln_status = " 🔴 VULNÉRABLE"
+                    vuln_status = "  VULNÉRABLE"
                 elif info.get("vulnerable") is False:
-                    vuln_status = " 🟢 Non vulnérable"
+                    vuln_status = "  Non vulnérable"
                 
                 print(f"   • Port {port}: {info['service']} ({info['status']}){vuln_status}")
                 
                 if info.get("vuln_info"):
                     print(f"     └─ {info['vuln_info']}")
         else:
-            print(f"\n⚠️  Aucun port ouvert détecté parmi: {ports_str}")
+            print(f"\n  Aucun port ouvert détecté parmi: {ports_str}")
         
         # Afficher la sortie complète du script NSE si disponible
         if nse_script and result.stdout:
@@ -209,10 +209,10 @@ def scan_ports_nmap(target_ip: str, ports: list, nse_script: str = None) -> dict
         return open_ports
     
     except subprocess.TimeoutExpired:
-        print("❌ Timeout du scan Nmap (peut être dû au script NSE)")
+        print(" Timeout du scan Nmap (peut être dû au script NSE)")
         return None
     except Exception as e:
-        print(f"❌ Erreur lors du scan Nmap: {e}")
+        print(f" Erreur lors du scan Nmap: {e}")
         return None
 
 
@@ -227,7 +227,7 @@ def check_nmap_installed() -> bool:
         subprocess.run(["nmap", "--version"], capture_output=True, check=True)
         return True
     except (subprocess.CalledProcessError, FileNotFoundError):
-        print("⚠️  Nmap n'est pas installé ou introuvable dans le PATH")
+        print("  Nmap n'est pas installé ou introuvable dans le PATH")
         print("   Installation: https://nmap.org/download.html")
         return False
 
@@ -340,16 +340,16 @@ def display_scan_results(open_ports: dict, ports_str: str):
         ports_str: Chaîne des ports scannés
     """
     if open_ports:
-        print(f"\n✅ Résultats du scan:")
+        print(f"\n Résultats du scan:")
         vulnerable_found = False
         
         for port, info in open_ports.items():
             vuln_status = ""
             if info.get("vulnerable"):
-                vuln_status = " 🔴 VULNÉRABLE À HEARTBLEED"
+                vuln_status = "  VULNÉRABLE À HEARTBLEED"
                 vulnerable_found = True
             else:
-                vuln_status = " 🟢 Non vulnérable"
+                vuln_status = "  Non vulnérable"
             
             print(f"   • Port {port}: {info['service']} ({info['status']}){vuln_status}")
             
@@ -359,11 +359,11 @@ def display_scan_results(open_ports: dict, ports_str: str):
                     print(f"     {detail}")
         
         if vulnerable_found:
-            print(f"\n🔴 ATTENTION: Heartbleed détecté !")
+            print(f"\n ATTENTION: Heartbleed détecté !")
         else:
-            print(f"\n🟢 Aucune vulnérabilité Heartbleed détectée")
+            print(f"\n Aucune vulnérabilité Heartbleed détectée")
     else:
-        print(f"\n⚠️  Aucun port ouvert détecté parmi: {ports_str}")
+        print(f"\n  Aucun port ouvert détecté parmi: {ports_str}")
 
 
 def display_nse_output(output: str, nse_script: str):
@@ -384,6 +384,6 @@ def display_nse_output(output: str, nse_script: str):
             script_output.append(line)
     
     if script_output:
-        print(f"\n📋 Résultat détaillé du script {nse_script}:")
+        print(f"\n Résultat détaillé du script {nse_script}:")
         for line in script_output[:10]:  # Limiter à 10 lignes
             print(f"   {line}")

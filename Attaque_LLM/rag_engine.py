@@ -12,7 +12,7 @@ try:
     from langchain_huggingface import HuggingFaceEmbeddings
     from langchain_core.documents import Document
 except ImportError as e:
-    print(f"❌ Erreur d'import : {e}")
+    print(f" Erreur d'import : {e}")
     print("pip install langchain-huggingface langchain-chroma langchain-core")
     sys.exit(1)
 
@@ -89,10 +89,10 @@ def initialize_knowledge_base():
     Optimisé pour éviter les crashs mémoire en gérant les fichiers séparément.
     """
     if os.path.exists(CHROMA_PATH) and os.listdir(CHROMA_PATH):
-        print(f"✅ Base RAG détectée dans {CHROMA_PATH}")
+        print(f" Base RAG détectée dans {CHROMA_PATH}")
         return
 
-    print("🔄 Initialisation du RAG (Ingestion des données)...")
+    print(" Initialisation du RAG (Ingestion des données)...")
     
     documents = []
     
@@ -104,18 +104,18 @@ def initialize_knowledge_base():
     for filename in NVD_FILES_TO_PROCESS:
         
         if not os.path.exists(filename):
-            print(f"⚠️ Fichier {filename} manquant. Ignoré. Téléchargez-le sur le site du NIST.")
+            print(f" Fichier {filename} manquant. Ignoré. Téléchargez-le sur le site du NIST.")
             continue
             
         try:
-            print(f"📂 Lecture et ingestion de {filename}...")
+            print(f" Lecture et ingestion de {filename}...")
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f) # Si la VM a < 1Go RAM, cela peut planter pour les très gros fichiers.
             
             # Support des deux formats NVD
             cve_items = data.get("CVE_Items", []) or data.get("vulnerabilities", [])
             total_cves = len(cve_items)
-            print(f"📄 {total_cves} CVEs trouvées dans {filename}.")
+            print(f" {total_cves} CVEs trouvées dans {filename}.")
             
             # Limite pour éviter de surcharger ChromaDB lors du dev
             for item in cve_items: 
@@ -139,16 +139,16 @@ def initialize_knowledge_base():
                     continue
             
         except MemoryError:
-            print(f"❌ Erreur Mémoire (OOM): Le fichier {filename} est trop gros pour la RAM. Continue au fichier suivant.")
+            print(f" Erreur Mémoire (OOM): Le fichier {filename} est trop gros pour la RAM. Continue au fichier suivant.")
         except Exception as e:
-            print(f"❌ Erreur inattendue lors de l'init RAG pour {filename}: {e}")
+            print(f" Erreur inattendue lors de l'init RAG pour {filename}: {e}")
     
     # Vérification finale avant vectorisation
     if not documents:
-        print("❌ Aucun document n'a pu être traité. Arrêt de l'initialisation.")
+        print(" Aucun document n'a pu être traité. Arrêt de l'initialisation.")
         return
 
-    print(f"🧠 Vectorisation de {len(documents)} documents au total (patience)...")
+    print(f" Vectorisation de {len(documents)} documents au total (patience)...")
     
     try:
         # Modèle léger pour CPU
@@ -159,10 +159,10 @@ def initialize_knowledge_base():
             embedding=embedding_function,
             persist_directory=CHROMA_PATH
         )
-        print("✅ Base de connaissances créée et sauvegardée.")
+        print(" Base de connaissances créée et sauvegardée.")
         
     except Exception as e:
-        print(f"❌ Erreur lors de la vectorisation: {e}")
+        print(f" Erreur lors de la vectorisation: {e}")
 
 def get_cve_context(cve_id: str) -> str | None:
     """
@@ -194,10 +194,10 @@ def get_cve_context(cve_id: str) -> str | None:
         # Utile si l'ID est mal formaté ou si la recherche exacte ne trouve rien pour une raison X
         docs = db.similarity_search(cve_id, k=1)
         if docs:
-            print(f"ℹ️ Recherche exacte échouée, résultat similaire trouvé: {docs[0].metadata}")
+            print(f"ℹ Recherche exacte échouée, résultat similaire trouvé: {docs[0].metadata}")
             return docs[0].page_content
         
         return None
     except Exception as e:
-        print(f"❌ Erreur lors de la recherche RAG pour {cve_id}: {e}")
+        print(f" Erreur lors de la recherche RAG pour {cve_id}: {e}")
         return None

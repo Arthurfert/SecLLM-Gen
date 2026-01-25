@@ -1,54 +1,54 @@
 # Interface Web - Orchestrateur PRAPP
 
-## 📋 Description
+##  Description
 
 L'Interface Web est le **centre de commande** du projet PRAPP. Elle permet de piloter les modules d'attaque et de défense via une interface graphique moderne et intuitive, tout en offrant des fonctionnalités avancées comme le raffinement par LLM et l'évaluation automatique de la qualité du code.
 
-## ✨ Fonctionnalités
+##  Fonctionnalités
 
-### 🎯 Gestion des Scénarios
+###  Gestion des Scénarios
 - Création de scénarios basés sur des CVE
 - Support du RAG (Retrieval-Augmented Generation) pour enrichir le contexte
 - Instructions personnalisées pour le LLM
 
-### 🔄 Génération Automatique
+###  Génération Automatique
 - Script d'attaque Python généré par LLM
 - Règles IDS Suricata générées simultanément
 - Boucle de feedback pour affiner les résultats
 
-### 📊 Évaluation de Qualité
+###  Évaluation de Qualité
 - Score global sur 100
 - Score détaillé pour le script d'attaque
 - Score détaillé pour les règles IDS
 - Feedback explicatif du LLM
 
-### 🎮 Exécution Contrôlée
+###  Exécution Contrôlée
 - Validation humaine obligatoire avant exécution
 - Simulation sur environnement de lab (mock)
 - Logs d'exécution détaillés
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Interface_web/
-├── 📁 orchestrator/          # Backend Python (FastAPI)
+├──  orchestrator/          # Backend Python (FastAPI)
 │   ├── requirements.txt      # Dépendances Python
-│   └── 📁 app/
+│   └──  app/
 │       ├── main.py           # API REST
 │       ├── models.py         # Modèles Pydantic/SQLAlchemy
 │       ├── db.py             # Gestion SQLite
-│       └── 📁 services/
+│       └──  services/
 │           ├── llm_service.py          # Interface Ollama
 │           ├── orchestrator_service.py # Logique métier
 │           ├── attacker_client.py      # Client module Attaque
 │           ├── ids_client.py           # Client module IDS
 │           └── code_evaluator.py       # Évaluateur de qualité
 │
-└── 📁 frontend/              # Frontend React
+└──  frontend/              # Frontend React
     ├── package.json          # Dépendances NPM
-    └── 📁 src/
+    └──  src/
         ├── App.js            # Application principale
         ├── App.css           # Styles
         └── index.js          # Point d'entrée
@@ -56,7 +56,7 @@ Interface_web/
 
 ---
 
-## 📋 Prérequis
+##  Prérequis
 
 ### Backend (Orchestrator)
 - **Python 3.10+**
@@ -69,7 +69,7 @@ Interface_web/
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### 1. Backend (Orchestrator)
 
@@ -95,7 +95,7 @@ npm install
 
 ---
 
-## ▶️ Lancement
+## ▶ Lancement
 
 ### Étape 1 : Démarrer Ollama
 
@@ -127,7 +127,7 @@ L'application s'ouvre automatiquement sur `http://localhost:3000`
 
 ---
 
-## 📖 Guide d'Utilisation
+##  Guide d'Utilisation
 
 ### Étape 1 : Définir le Scénario
 
@@ -140,7 +140,7 @@ L'application s'ouvre automatiquement sur `http://localhost:3000`
    Cible un serveur Apache 2.4.
    ```
 
-3. **Option RAG** : Cochez "🔍 Utiliser le RAG" pour enrichir le contexte avec les données NVD
+3. **Option RAG** : Cochez " Utiliser le RAG" pour enrichir le contexte avec les données NVD
 
 4. Cliquez sur **"Générer script & règles IDS"**
 
@@ -178,8 +178,8 @@ Si les scripts ne conviennent pas :
 ### Étape 3 : Exécution
 
 1. **Validation obligatoire** : Cochez les deux cases :
-   - ☑️ Script d'attaque relu et validé par un humain
-   - ☑️ Règles IDS relues et validées par un humain
+   -  Script d'attaque relu et validé par un humain
+   -  Règles IDS relues et validées par un humain
 
 2. Cliquez sur **"Exécuter la simulation sur le lab"**
 
@@ -195,7 +195,7 @@ Si les scripts ne conviennent pas :
 
 ---
 
-## 🔌 API REST
+##  API REST
 
 ### Endpoints Disponibles
 
@@ -247,7 +247,7 @@ curl -X POST http://127.0.0.1:8000/scenarios/1/refine \
 
 ---
 
-## 🎨 Interface Utilisateur
+##  Interface Utilisateur
 
 ### Palette de Couleurs (Dark Mode)
 
@@ -274,7 +274,7 @@ curl -X POST http://127.0.0.1:8000/scenarios/1/refine \
 
 ---
 
-## 🔧 Configuration
+##  Configuration
 
 ### Variables d'environnement
 
@@ -307,7 +307,7 @@ app.add_middleware(
 
 ---
 
-## 🐛 Dépannage
+##  Dépannage
 
 ### Le backend ne démarre pas
 
@@ -348,7 +348,7 @@ ollama run mistral "Hello"
 
 ---
 
-## 📁 Structure des Modèles de Données
+##  Structure des Modèles de Données
 
 ### ScenarioIn (Entrée)
 ```json
@@ -394,7 +394,7 @@ ollama run mistral "Hello"
 
 ---
 
-## 🔮 Évolutions Futures
+##  Évolutions Futures
 
 - [ ] Intégration Proxmox pour VMs dynamiques
 - [ ] Exécution réelle des exploits (non mockée)
@@ -405,7 +405,7 @@ ollama run mistral "Hello"
 
 ---
 
-## 📚 Ressources
+##  Ressources
 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [React Documentation](https://react.dev/)

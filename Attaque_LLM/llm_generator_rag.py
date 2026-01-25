@@ -14,7 +14,7 @@ def _ensure_rag_initialized():
     """Initialise le RAG une seule fois au premier appel."""
     global _rag_initialized
     if not _rag_initialized:
-        print("🔄 Vérification/Initialisation de la base RAG...")
+        print(" Vérification/Initialisation de la base RAG...")
         initialize_knowledge_base()
         _rag_initialized = True
 
@@ -39,13 +39,13 @@ def generate_exploit_script(cve: str, target_ip: str = None, target_port: int = 
     _ensure_rag_initialized()
     
     # ### MODIF RAG : Récupération du contexte
-    print(f"🔍 Etape 0/3: Recherche d'infos RAG pour {cve}...")
+    print(f" Etape 0/3: Recherche d'infos RAG pour {cve}...")
     cve_context = get_cve_context(cve)
     
     # Préparer le bloc de contexte RAG
     rag_context_block = ""
     if cve_context:
-        print("✅ Contexte RAG trouvé et sera injecté dans le meta-prompt.")
+        print(" Contexte RAG trouvé et sera injecté dans le meta-prompt.")
         clean_context = cve_context.replace('\n', ' ').replace('\r', '').strip()
         rag_context_block = f"""
 VULNERABILITY TECHNICAL DETAILS (from NVD Database):
@@ -53,7 +53,7 @@ VULNERABILITY TECHNICAL DETAILS (from NVD Database):
 
 Use these technical details to create a more accurate and specific prompt."""
     else:
-        print("⚠️ Pas de contexte RAG trouvé (le LLM devra se baser sur ses connaissances).")
+        print(" Pas de contexte RAG trouvé (le LLM devra se baser sur ses connaissances).")
 
     # Construire les infos de cible
     target_info = f"{target_ip if target_ip else 'TARGET_IP'}:{target_port if target_port else 'TARGET_PORT'}"
@@ -61,7 +61,7 @@ Use these technical details to create a more accurate and specific prompt."""
     # ===========================================
     # Etape 1: Meta-Prompting (enrichi par RAG)
     # ===========================================
-    print(f"🤔 Etape 1/3: Analyse de la CVE et génération du prompt optimisé...")
+    print(f" Etape 1/3: Analyse de la CVE et génération du prompt optimisé...")
     
     meta_prompt = f"""You are a prompt engineering expert specialized in cybersecurity.
 
@@ -106,7 +106,7 @@ Reply ONLY with the prompt text. Do not include any other explanation."""
         
         # Vérification si le LLM a généré du code au lieu d'un prompt
         if optimized_prompt.startswith("```") or "def " in optimized_prompt[:100] or "import " in optimized_prompt[:50]:
-            print("⚠️ Le LLM a généré du code au lieu d'un prompt. Adaptation...")
+            print(" Le LLM a généré du code au lieu d'un prompt. Adaptation...")
             optimized_prompt = f"""Refactor and improve this code to be a complete working exploit for {cve}.
 Ensure it uses scapy, defines TARGET_IP and TARGET_PORT, and includes proper error handling.
 
@@ -115,10 +115,10 @@ Code to improve:
 
 Output ONLY the corrected Python code."""
         else:
-            print(f"📝 Prompt optimisé généré ({len(optimized_prompt)} caractères)")
+            print(f" Prompt optimisé généré ({len(optimized_prompt)} caractères)")
         
     except Exception as e:
-        print(f"⚠️ Erreur Meta-Prompting: {e}")
+        print(f" Erreur Meta-Prompting: {e}")
         print("   Utilisation d'un prompt par défaut enrichi par le RAG...")
         
         # Prompt de fallback enrichi par le RAG
@@ -143,7 +143,7 @@ OUTPUT: Provide ONLY the Python code."""
     # ===========================================
     # Etape 2: Génération du script
     # ===========================================
-    print(f"🔄 Etape 2/3: Génération du script d'exploitation...")
+    print(f" Etape 2/3: Génération du script d'exploitation...")
     
     payload_exploit = {
         "model": model_name,
@@ -162,17 +162,17 @@ OUTPUT: Provide ONLY the Python code."""
         response.raise_for_status()
         generated_script = response.json().get("response", "")
     except Exception as e:
-        print(f"❌ Erreur Génération: {e}")
+        print(f" Erreur Génération: {e}")
         return None
 
     if not generated_script:
-        print("❌ Le LLM n'a pas généré de script.")
+        print(" Le LLM n'a pas généré de script.")
         return None
 
     # ===========================================
     # Etape 3: Auto-correction
     # ===========================================
-    print(f"🔧 Etape 3/3: Vérification et correction du script...")
+    print(f" Etape 3/3: Vérification et correction du script...")
     
     correction_prompt = f"""You are a senior security researcher and Python expert.
 
@@ -207,7 +207,7 @@ Output ONLY the corrected raw Python code. No markdown, no explanations."""
         final_script = response_corr.json().get("response", "")
         return final_script
     except Exception as e:
-        print(f"⚠️ Erreur Correction: {e}")
+        print(f" Erreur Correction: {e}")
         return generated_script  # Retourner le script non corrigé en cas d'erreur
 
 def save_script(cve: str, content: str, target_ip: str = None, target_port: int = None) -> str:
@@ -256,7 +256,7 @@ def save_script(cve: str, content: str, target_ip: str = None, target_port: int 
     # Créer le header
     header = f"""# Script d'exploitation pour {cve}
 # Généré le {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-# ⚠️ AVERTISSEMENT: Usage éducatif uniquement
+#  AVERTISSEMENT: Usage éducatif uniquement
 """
     
     if target_ip and target_port:
@@ -287,10 +287,10 @@ def get_available_models() -> list:
         models = [model['name'] for model in data.get('models', [])]
         return models
     except requests.exceptions.ConnectionError:
-        print("⚠️  Impossible de se connecter à Ollama")
+        print("  Impossible de se connecter à Ollama")
         return []
     except Exception as e:
-        print(f"⚠️  Erreur lors de la récupération des modèles: {e}")
+        print(f"  Erreur lors de la récupération des modèles: {e}")
         return []
 
 

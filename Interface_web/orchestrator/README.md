@@ -1,4 +1,4 @@
-📘 Orchestrator PRAPP
+ Orchestrator PRAPP
 Assistant de Pentest · LLM + IDS (Version Mock – Développement Local)
 
 Ce projet contient :
@@ -19,7 +19,7 @@ LLM sur GPU (serveur distant)
 
 Scans Nmap automatisés
 
-📁 1. Structure du projet
+ 1. Structure du projet
 Orchestrator/
 │
 ├── app/
@@ -38,7 +38,7 @@ Orchestrator/
 ├── env/                  # créé localement (non versionné normalement)
 └── README.md
 
-🛠️ 2. Prérequis
+ 2. Prérequis
 
 Python ≥ 3.10
 
@@ -48,7 +48,7 @@ npm (installé avec Node)
 
 Windows / macOS / Linux
 
-🚀 3. Installation du Backend FastAPI
+ 3. Installation du Backend FastAPI
 3.1. Aller dans le dossier
 cd Orchestrator
 
@@ -69,7 +69,7 @@ source env/bin/activate
 3.4. Installer les dépendances
 pip install -r requirements.txt
 
-▶️ 4. Lancer le backend FastAPI
+▶ 4. Lancer le backend FastAPI
 uvicorn app.main:app --reload
 
 
@@ -80,32 +80,32 @@ Application startup complete.
 
 Vérifier le backend
 
-👉 http://127.0.0.1:8000/docs
+ http://127.0.0.1:8000/docs
 
 (Swagger doit apparaître)
 
-🌐 5. Installation du Frontend React
+ 5. Installation du Frontend React
 5.1. Aller dans le dossier du frontend
 cd frontend
 
 5.2. Installer les dépendances
 npm install
 
-▶️ 6. Lancer le frontend
+▶ 6. Lancer le frontend
 npm start
 
 
 Le navigateur s’ouvre sur :
 
-👉 http://localhost:3000
+ http://localhost:3000
 
-🔗 7. Communication Frontend ↔ Backend
+ 7. Communication Frontend ↔ Backend
 
 Dans App.js :
 
 const API_BASE = "http://127.0.0.1:8000";
 
-⚠️ IMPORTANT — CORS dans FastAPI
+ IMPORTANT — CORS dans FastAPI
 
 Dans app/main.py, ceci doit être présent juste après la création de app :
 
@@ -122,7 +122,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-👨‍💻 8. Utilisation (Flux complet)
+‍ 8. Utilisation (Flux complet)
 
 Lancer backend
 
@@ -144,7 +144,7 @@ Cliquer sur Exécuter la simulation (mock)
 
 Voir les logs mockés
 
-🧪 9. Tests rapides
+ 9. Tests rapides
 Backend seul :
 curl http://127.0.0.1:8000/scenarios
 
@@ -152,7 +152,7 @@ Frontend → Backend :
 
 vérifier l’absence de "Failed to fetch".
 
-❗ 10. Dépannage
+ 10. Dépannage
 "Failed to fetch" dans le frontend → 3 causes possibles :
 
 Backend non lancé
@@ -167,7 +167,7 @@ Port déjà pris → essayer :
 
 uvicorn app.main:app --reload --port 8001
 
-🤝 11. Contribution
+ 11. Contribution
 
 Les routes du backend doivent rester stables
 
@@ -175,7 +175,7 @@ Le frontend doit fonctionner même avec des résultats mock
 
 Toujours tester la génération + validation + exécution
 
-📄 12. Licence & contexte
+ 12. Licence & contexte
 
 Projet académique — Module
 PRAPP – IA générative & Cybermenaces

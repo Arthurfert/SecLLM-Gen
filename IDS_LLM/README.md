@@ -6,12 +6,12 @@ Ce module utilise l'**intelligence artificielle générative** (Ollama) pour cr�
 
 ## Fonctionnalités
 
-- ✅ Génération automatique de règles Suricata via LLM
-- ✅ Détection multi-modèles Ollama (sélection interactive)
-- ✅ Règles génériques couvrant toutes les variantes d'exploitation
-- ✅ Commentaires explicatifs dans les règles générées
-- ✅ Sauvegarde automatique avec timestamp
-- ✅ Support de multiples CVE
+-  Génération automatique de règles Suricata via LLM
+-  Détection multi-modèles Ollama (sélection interactive)
+-  Règles génériques couvrant toutes les variantes d'exploitation
+-  Commentaires explicatifs dans les règles générées
+-  Sauvegarde automatique avec timestamp
+-  Support de multiples CVE
 
 ## Prérequis
 
@@ -67,27 +67,27 @@ Le programme vous guidera à travers :
 
 ```
 ============================================================
-🔐 Générateur de Scripts de règles IDS
+ Générateur de Scripts de règles IDS
 ============================================================
 
 CVE à défendre (ex: CVE-2014-0160): CVE-2014-0160
 
-🔍 Récupération des modèles Ollama disponibles...
+ Récupération des modèles Ollama disponibles...
 
-📋 Modèles disponibles (2):
+ Modèles disponibles (2):
    1. mistral:latest
    2. codestral:latest
 
 Choisissez un modèle (numéro ou nom, Entrée pour le 1er): 1
 Modèle sélectionné: mistral:latest
 
-🔄 Génération des règles IDS pour CVE-2014-0160...
+ Génération des règles IDS pour CVE-2014-0160...
 
 ============================================================
-📝 Script généré
+ Script généré
 ============================================================
 
-✅ Script sauvegardé: ./IDS_LLM/scripts/ids_CVE_2014_0160_20251119_143022.txt
+ Script sauvegardé: ./IDS_LLM/scripts/ids_CVE_2014_0160_20251119_143022.txt
 ```
 
 ## Structure des Règles Générées

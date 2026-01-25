@@ -26,7 +26,7 @@ def generate_exploit_script(cve: str, target_ip: str = None, target_port: int = 
         str: Le script Python généré
     """
     # Etape 1: Génération du prompt optimisé (Meta-Prompting)
-    print(f"🤔 Etape 1/3: Analyse de la CVE et génération du prompt optimisé...")
+    print(f" Etape 1/3: Analyse de la CVE et génération du prompt optimisé...")
     
     meta_prompt = f"""You are a prompt engineering expert.
 GOAL: Write a highly technical prompt to instruct an AI to write a Python exploit for {cve}.
@@ -64,13 +64,13 @@ Reply ONLY with the prompt text."""
         
         # Vérification basique si le LLM a échoué et donné du code
         if "def " in optimized_prompt or "import " in optimized_prompt:
-            print("⚠️ Le LLM a généré du code au lieu d'un prompt. Adaptation...")
+            print(" Le LLM a généré du code au lieu d'un prompt. Adaptation...")
             optimized_prompt = f"Refactor and fix this code to be a working exploit for {cve}:\n\n{optimized_prompt}"
         else:
-            print(f"📝 Prompt généré :\n{optimized_prompt}\n")
+            print(f" Prompt généré :\n{optimized_prompt}\n")
         
     except Exception as e:
-        print(f"⚠️ Erreur Meta-Prompting: {e}")
+        print(f" Erreur Meta-Prompting: {e}")
         print("Utilisation du prompt par défaut.")
         target_info = ""
         if target_ip and target_port:
@@ -81,7 +81,7 @@ Reply ONLY with the prompt text."""
 Use 'scapy'. Output raw Python code only. No markdown."""
 
     # Etape 2: Génération du script
-    print(f"🔄 Etape 2/3: Génération du script d'exploitation...")
+    print(f" Etape 2/3: Génération du script d'exploitation...")
     
     payload_exploit = {
         "model": model_name,
@@ -100,14 +100,14 @@ Use 'scapy'. Output raw Python code only. No markdown."""
         response.raise_for_status()
         generated_script = response.json().get("response", "")
     except Exception as e:
-        print(f"❌ Erreur Génération: {e}")
+        print(f" Erreur Génération: {e}")
         return None
 
     if not generated_script:
         return None
 
     # Etape 3: Auto-correction
-    print(f"🔧 Etape 3/3: Vérification et correction du script...")
+    print(f" Etape 3/3: Vérification et correction du script...")
     
     correction_prompt = f"""You are a senior security researcher and python expert.
 Review the following Python exploit script for {cve}.
@@ -136,7 +136,7 @@ Output ONLY the corrected raw Python code. No markdown, no explanations."""
         final_script = response_corr.json().get("response", "")
         return final_script
     except Exception as e:
-        print(f"⚠️ Erreur Correction: {e}")
+        print(f" Erreur Correction: {e}")
         return generated_script # Retourner le script non corrigé en cas d'erreur
 
 
@@ -186,7 +186,7 @@ def save_script(cve: str, content: str, target_ip: str = None, target_port: int 
     # Créer le header
     header = f"""# Script d'exploitation pour {cve}
 # Généré le {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-# ⚠️ AVERTISSEMENT: Usage éducatif uniquement
+#  AVERTISSEMENT: Usage éducatif uniquement
 """
     
     if target_ip and target_port:
@@ -217,10 +217,10 @@ def get_available_models() -> list:
         models = [model['name'] for model in data.get('models', [])]
         return models
     except requests.exceptions.ConnectionError:
-        print("⚠️  Impossible de se connecter à Ollama")
+        print("  Impossible de se connecter à Ollama")
         return []
     except Exception as e:
-        print(f"⚠️  Erreur lors de la récupération des modèles: {e}")
+        print(f"  Erreur lors de la récupération des modèles: {e}")
         return []
 
 

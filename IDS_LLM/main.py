@@ -8,7 +8,7 @@ from llm_generator import generate_ids_script, save_script, get_available_models
 def main():
     """Programme principal"""
     print("=" * 60)
-    print("🔐 Générateur de Scripts de règles IDS")
+    print(" Générateur de Scripts de règles IDS")
     print("=" * 60)
     print()
     
@@ -22,11 +22,11 @@ def main():
     print()
 
     # Récupérer les modèles Ollama disponibles
-    print("\n🔍 Récupération des modèles Ollama disponibles...")
+    print("\n Récupération des modèles Ollama disponibles...")
     available_models = get_available_models()
     
     if available_models:
-        print(f"\n📋 Modèles disponibles ({len(available_models)}):")
+        print(f"\n Modèles disponibles ({len(available_models)}):")
         for idx, model in enumerate(available_models, 1):
             print(f"   {idx}. {model}")
         
@@ -41,7 +41,7 @@ def main():
                 model_name = available_models[choice_idx - 1]
                 print(f"Modèle sélectionné: {model_name}")
             else:
-                print(f"⚠️  Choix invalide, utilisation du premier modèle: {available_models[0]}")
+                print(f"  Choix invalide, utilisation du premier modèle: {available_models[0]}")
                 model_name = available_models[0]
         else:
             # Vérifier si le nom existe
@@ -49,10 +49,10 @@ def main():
                 model_name = model_choice
                 print(f"Modèle sélectionné: {model_name}")
             else:
-                print(f"⚠️  Modèle '{model_choice}' non trouvé, utilisation de: {available_models[0]}")
+                print(f"  Modèle '{model_choice}' non trouvé, utilisation de: {available_models[0]}")
                 model_name = available_models[0]
     else:
-        print("\n⚠️  Aucun modèle Ollama détecté. Assurez-vous qu'Ollama est lancé.")
+        print("\n  Aucun modèle Ollama détecté. Assurez-vous qu'Ollama est lancé.")
         model_name = input("Entrez le nom du modèle à utiliser (ex: codestral): ").strip()
         if not model_name:
             model_name = "codestral"
@@ -63,14 +63,14 @@ def main():
     
     if script_content:
         print("\n" + "=" * 60)
-        print("📝 Script généré")
+        print(" Script généré")
         print("=" * 60)
         
         # Sauvegarder le script
         filepath = save_script(cve, script_content)
-        print(f"\n✅ Script sauvegardé: {filepath}")
+        print(f"\n Script sauvegardé: {filepath}")
     else:
-        print("\n❌ Échec de la génération du script.")
+        print("\n Échec de la génération du script.")
 
 
 if __name__ == "__main__":

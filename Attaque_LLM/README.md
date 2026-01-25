@@ -4,7 +4,7 @@
 
 Ce projet est un outil éducatif de cybersécurité qui utilise **Ollama** avec le modèle **Mistral** pour générer des scripts d'exploitation de vulnérabilités CVE (Common Vulnerabilities and Exposures). 
 
-⚠️ **AVERTISSEMENT** : Cet outil est destiné uniquement à des fins éducatives et de recherche en sécurité informatique. L'utilisation malveillante de cet outil est strictement interdite et illégale.
+ **AVERTISSEMENT** : Cet outil est destiné uniquement à des fins éducatives et de recherche en sécurité informatique. L'utilisation malveillante de cet outil est strictement interdite et illégale.
 
 ## Fonctionnalités
 
@@ -26,16 +26,16 @@ Le script reconnaît automatiquement les CVE suivantes et leurs ports typiques :
 
 | CVE | Service | Ports typiques | Script NSE |
 |-----|---------|----------------|------------|
-| CVE-2014-0160 | OpenSSL (Heartbleed) | Détection auto SSL/TLS* | ssl-heartbleed ✅ |
-| CVE-2017-0144 | SMB (EternalBlue) | 445, 139 | smb-vuln-ms17-010 ✅ |
+| CVE-2014-0160 | OpenSSL (Heartbleed) | Détection auto SSL/TLS* | ssl-heartbleed  |
+| CVE-2017-0144 | SMB (EternalBlue) | 445, 139 | smb-vuln-ms17-010  |
 | CVE-2021-44228 | Log4j | 8080, 443, 9200 | - |
-| CVE-2017-5638 | Apache Struts | 8080, 80, 443 | http-vuln-cve2017-5638 ✅ |
-| CVE-2019-0708 | RDP (BlueKeep) | 3389 | rdp-vuln-ms12-020 ✅ |
-| CVE-2014-6271 | Bash (Shellshock) | 80, 443, 8080 | http-shellshock ✅ |
+| CVE-2017-5638 | Apache Struts | 8080, 80, 443 | http-vuln-cve2017-5638  |
+| CVE-2019-0708 | RDP (BlueKeep) | 3389 | rdp-vuln-ms12-020  |
+| CVE-2014-6271 | Bash (Shellshock) | 80, 443, 8080 | http-shellshock  |
 | CVE-2012-1823 | PHP-CGI | 80, 443, 8080 | - |
 | CVE-2015-1427 | Elasticsearch | 9200 | - |
 
-✅ = Détection automatique de la vulnérabilité avec script NSE  
+ = Détection automatique de la vulnérabilité avec script NSE  
 \* Pour Heartbleed, le système détecte automatiquement **tous les ports SSL/TLS ouverts** (pas de ports fixes) pour s'adapter à tous les OS et configurations
 
 ## Prérequis
@@ -97,7 +97,7 @@ python -m venv venv
 ### 5. Installez les dépendances
 
 ```powershell
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 ```
 
 ## Utilisation
@@ -138,8 +138,8 @@ Si la CVE est reconnue dans la base de données, le script propose de scanner au
 
 - **Oui (o)** : Lance un scan Nmap sur les ports typiques de cette CVE
   - Si un **script NSE** est disponible, il sera utilisé pour détecter la vulnérabilité
-  - Les ports **réellement vulnérables** sont **priorisés automatiquement** 🔴
-  - Les ports non vulnérables sont marqués 🟢
+  - Les ports **réellement vulnérables** sont **priorisés automatiquement** 
+  - Les ports non vulnérables sont marqués 
 - **Non (N)** : Vous pourrez entrer manuellement le port
 
 Si des ports ouverts sont détectés, le script vous propose de choisir lequel exploiter.
@@ -148,15 +148,15 @@ Si des ports ouverts sont détectés, le script vous propose de choisir lequel e
 
 ```
 ============================================================
-🔐 Générateur de Scripts d'Exploitation CVE
-⚠️  Usage éducatif et éthique uniquement
+ Générateur de Scripts d'Exploitation CVE
+  Usage éducatif et éthique uniquement
 ============================================================
 
 CVE à exploiter (ex: CVE-2014-0160): CVE-2014-0160
 
 Adresse IP de la cible (ex: 192.168.1.10): 192.168.1.50
 
-🎯 Mode: Détection Heartbleed directe avec Nmap
+ Mode: Détection Heartbleed directe avec Nmap
 
 Options de scan:
   1. Détection automatique des ports SSL/TLS (recommandé)
@@ -164,39 +164,39 @@ Options de scan:
 
 Votre choix (1/2, Entrée=1): 1
 
-🔍 Détection des ports SSL/TLS sur 192.168.1.50...
+ Détection des ports SSL/TLS sur 192.168.1.50...
    Plage de ports: 1-10000
-   ✓ Port SSL/TLS détecté: 443 (https)
-   ✓ Port SSL/TLS détecté: 8443 (ssl/http)
+    Port SSL/TLS détecté: 443 (https)
+    Port SSL/TLS détecté: 8443 (ssl/http)
 
-✅ 2 port(s) SSL/TLS détectés: 443, 8443
+ 2 port(s) SSL/TLS détectés: 443, 8443
 
-🔍 Test Heartbleed sur 192.168.1.50...
+ Test Heartbleed sur 192.168.1.50...
    Ports testés: 443, 8443
    Script NSE: ssl-heartbleed
    Commande: nmap -p 443,8443 -sV -T4 --script ssl-heartbleed --open 192.168.1.50
 
-✅ Ports ouverts détectés:
-   • Port 443: https (open) 🔴 VULNÉRABLE
+ Ports ouverts détectés:
+   • Port 443: https (open)  VULNÉRABLE
      └─ |   State: VULNERABLE
 
-📋 Résultat détaillé du script ssl-heartbleed:
+ Résultat détaillé du script ssl-heartbleed:
    | ssl-heartbleed:
    |   VULNERABLE:
    |   The Heartbleed Bug is a serious vulnerability...
 
-🔴 1 port(s) VULNÉRABLE(S) détecté(s) !
-✅ Port vulnérable sélectionné automatiquement: 443
+ 1 port(s) VULNÉRABLE(S) détecté(s) !
+ Port vulnérable sélectionné automatiquement: 443
 
-🎯 Cible: 192.168.1.50:443
+ Cible: 192.168.1.50:443
 
-🔄 Génération du script d'exploitation pour CVE-2014-0160...
+ Génération du script d'exploitation pour CVE-2014-0160...
 
 ============================================================
-📝 Script généré
+ Script généré
 ============================================================
 
-✅ Script sauvegardé: scripts/exploit_CVE_2014_0160_20251117_143022.py
+ Script sauvegardé: scripts/exploit_CVE_2014_0160_20251117_143022.py
 ```
 
 ### Exemple sans scan Nmap
@@ -205,15 +205,15 @@ Votre choix (1/2, Entrée=1): 1
 CVE à exploiter (ex: CVE-2014-0160): CVE-2021-44228
 Adresse IP de la cible (ex: 192.168.1.10): 10.0.0.5
 
-📋 CVE détectée: Log4j
+ CVE détectée: Log4j
    Ports typiques: 8080, 443, 9200
 
-🔍 Voulez-vous scanner ces ports avec Nmap? (o/N): N
+ Voulez-vous scanner ces ports avec Nmap? (o/N): N
 Port de la cible (ex: 8080): 8080
 
-🎯 Cible: 10.0.0.5:8080
+ Cible: 10.0.0.5:8080
 
-🔄 Génération du script d'exploitation pour CVE-2021-44228...
+ Génération du script d'exploitation pour CVE-2021-44228...
 ```
 
 ### CVE non reconnue
@@ -224,19 +224,19 @@ Si vous entrez une CVE qui n'est pas dans la base de données :
 CVE à exploiter (ex: CVE-2014-0160): CVE-2024-1234
 Adresse IP de la cible (ex: 192.168.1.10): 192.168.1.100
 
-⚠️  CVE CVE-2024-1234 non reconnue dans la base de données
+  CVE CVE-2024-1234 non reconnue dans la base de données
 Port de la cible (ex: 80): 443
 
-🎯 Cible: 192.168.1.100:443
+ Cible: 192.168.1.100:443
 ```
 
 ## Avantages d'Ollama vs Hugging Face
 
-✅ **Performances** : Beaucoup plus rapide (optimisé pour votre machine)  
-✅ **Pas de téléchargement** : Pas besoin de télécharger 15 GB à chaque fois  
-✅ **Moins de RAM** : Ollama gère la mémoire de façon optimale  
-✅ **Simple** : API REST facile à utiliser  
-✅ **Local** : Tout reste sur votre machine  
+ **Performances** : Beaucoup plus rapide (optimisé pour votre machine)  
+ **Pas de téléchargement** : Pas besoin de télécharger 15 GB à chaque fois  
+ **Moins de RAM** : Ollama gère la mémoire de façon optimale  
+ **Simple** : API REST facile à utiliser  
+ **Local** : Tout reste sur votre machine  
 
 ## Structure du projet
 

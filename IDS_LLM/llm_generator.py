@@ -45,7 +45,7 @@ Règles à suivre ABSOLUMENT :
     }
     
     try:
-        print(f"🔄 Génération des règles IDS pour {cve}...")
+        print(f" Génération des règles IDS pour {cve}...")
         response = requests.post(OLLAMA_API_URL, json=payload, timeout=560)
         response.raise_for_status()
         
@@ -53,14 +53,14 @@ Règles à suivre ABSOLUMENT :
         return result.get("response", "")
     
     except requests.exceptions.ConnectionError:
-        print("❌ Erreur: Impossible de se connecter à Ollama.")
+        print(" Erreur: Impossible de se connecter à Ollama.")
         print("Assurez-vous qu'Ollama est en cours d'exécution (ollama serve).")
         return None
     except requests.exceptions.Timeout:
-        print("❌ Erreur: La requête a expiré.")
+        print(" Erreur: La requête a expiré.")
         return None
     except Exception as e:
-        print(f"❌ Erreur inattendue: {e}")
+        print(f" Erreur inattendue: {e}")
         return None
 
 def get_available_models() -> list:
@@ -78,10 +78,10 @@ def get_available_models() -> list:
         models = [model['name'] for model in data.get('models', [])]
         return models
     except requests.exceptions.ConnectionError:
-        print("⚠️  Impossible de se connecter à Ollama")
+        print("  Impossible de se connecter à Ollama")
         return []
     except Exception as e:
-        print(f"⚠️  Erreur lors de la récupération des modèles: {e}")
+        print(f"  Erreur lors de la récupération des modèles: {e}")
         return []
 
 def save_script(cve: str, content: str) -> str:

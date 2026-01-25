@@ -562,7 +562,7 @@ function App() {
                 onChange={(e) => setUseRag(e.target.checked)}
                 style={{ width: "18px", height: "18px", accentColor: "#22c55e" }}
               />
-              <span style={{ fontWeight: 500 }}>🔍 Utiliser le RAG (Retrieval-Augmented Generation)</span>
+              <span style={{ fontWeight: 500 }}> Utiliser le RAG (Retrieval-Augmented Generation)</span>
             </label>
             <p style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.25rem", marginLeft: "1.5rem" }}>
               Active la recherche dans la base de données NVD pour enrichir le contexte du LLM avec des informations techniques sur la CVE.
@@ -639,7 +639,7 @@ function App() {
             {/* Feedback au LLM */}
             <div style={feedbackBoxStyle}>
               <label style={{ ...labelStyle, color: "#fbbf24" }}>
-                🔄 Demander un raffinement au LLM
+                 Demander un raffinement au LLM
               </label>
               <p style={{ fontSize: "0.8rem", color: "#9ca3af", marginBottom: "0.5rem" }}>
                 Si les scripts générés ne vous conviennent pas, décrivez ce qui doit être corrigé.
@@ -747,7 +747,7 @@ function App() {
 
             <div style={{ ...fieldRowStyle, gap: "1rem" }}>
               <div style={fieldColStyle}>
-                <label style={labelStyle}>📝 Feedback - Script d'Attaque</label>
+                <label style={labelStyle}> Feedback - Script d'Attaque</label>
                 <textarea
                   style={{ ...textareaStyle, minHeight: "200px", fontSize: "0.8rem" }}
                   value={evaluation.attack_feedback}
@@ -755,7 +755,7 @@ function App() {
                 />
               </div>
               <div style={fieldColStyle}>
-                <label style={labelStyle}>🛡️ Feedback - Règles IDS</label>
+                <label style={labelStyle}> Feedback - Règles IDS</label>
                 <textarea
                   style={{ ...textareaStyle, minHeight: "200px", fontSize: "0.8rem" }}
                   value={evaluation.ids_feedback}

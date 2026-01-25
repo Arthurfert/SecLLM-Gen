@@ -2,7 +2,7 @@
 
 **Applied Research Project (PRAPP) - Télécom Saint-Etienne**
 
-## 📖 Overview
+##  Overview
 
 This project explores the application of **Generative Artificial Intelligence** in both **Offensive and Defensive Cybersecurity**. It facilitates the automated generation of vulnerability exploitation scripts (CVEs) and corresponding Intrusion Detection System (IDS) rules, leveraging local Large Language Models (LLMs) via Ollama and Retrieval-Augmented Generation (RAG).
 
@@ -10,15 +10,15 @@ This project explores the application of **Generative Artificial Intelligence** 
 
 | Module | Description | Status |
 | :--- | :--- | :--- |
-| 🔴 **Attaque_LLM** | Automated CVE exploit generation with RAG support | ✅ Functional |
-| 🛡️ **IDS_LLM** | Automated creation of Suricata detection rules | ✅ Functional |
-| 🌐 **Interface_web** | Centralized orchestration via React + FastAPI | ✅ Functional |
+|  **Attaque_LLM** | Automated CVE exploit generation with RAG support |  Functional |
+|  **IDS_LLM** | Automated creation of Suricata detection rules |  Functional |
+|  **Interface_web** | Centralized orchestration via React + FastAPI |  Functional |
 
-⚠️ **Disclaimer**: This project is strictly for **educational and research purposes** within the framework of PRAPP 2025.
+ **Disclaimer**: This project is strictly for **educational and research purposes** within the framework of PRAPP 2025.
 
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 1. [Project Objectives](#-project-objectives)
 2. [System Architecture](#-system-architecture)
@@ -33,7 +33,7 @@ This project explores the application of **Generative Artificial Intelligence** 
 
 ---
 
-## 🎯 Project Objectives
+##  Project Objectives
 
 ### 1. Demonstrate AI Capabilities in Cybersecurity
 - Automate exploit generation using LLMs.
@@ -52,11 +52,11 @@ This project explores the application of **Generative Artificial Intelligence** 
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```
 52/
-├── 📁 Attaque_LLM/              # Offensive Module
+├──  Attaque_LLM/              # Offensive Module
 │   ├── main.py                  # Main entry point
 │   ├── llm_generator.py         # Ollama Interface (Standard)
 │   ├── llm_generator_rag.py     # Ollama Interface with RAG
@@ -65,24 +65,24 @@ This project explores the application of **Generative Artificial Intelligence** 
 │   ├── cve_database.py          # Local CVE Database
 │   ├── api_server.py            # REST API for Orchestrator
 │   ├── requirements.txt         # Python Dependencies
-│   ├── 📁 CVE_info_rag/         # NVD Data for RAG - unable to push to github
-│   ├── 📁 chroma_db/            # Vector Database
-│   └── 📁 scripts/              # Generated Exploit Scripts
+│   ├──  CVE_info_rag/         # NVD Data for RAG - unable to push to github
+│   ├──  chroma_db/            # Vector Database
+│   └──  scripts/              # Generated Exploit Scripts
 │
-├── 📁 IDS_LLM/                  # Defensive Module
+├──  IDS_LLM/                  # Defensive Module
 │   ├── main.py                  # Main Entry Point
 │   ├── llm_generator.py         # Ollama Interface
-│   └── 📁 scripts/              # Generated IDS Rules
+│   └──  scripts/              # Generated IDS Rules
 │
-├── 📁 Interface_web/            # Centralized Interface
-│   ├── 📁 orchestrator/         # FastAPI Backend
+├──  Interface_web/            # Centralized Interface
+│   ├──  orchestrator/         # FastAPI Backend
 │   │   ├── app/
 │   │   │   ├── main.py          # REST API
 │   │   │   ├── models.py        # Pydantic/SQLAlchemy Models
 │   │   │   ├── db.py            # Database Management
-│   │   │   └── 📁 services/     # Business Logic
+│   │   │   └──  services/     # Business Logic
 │   │   └── requirements.txt
-│   └── 📁 frontend/             # React Frontend
+│   └──  frontend/             # React Frontend
 │       ├── src/App.js           # Main Application
 │       └── package.json
 │
@@ -91,7 +91,7 @@ This project explores the application of **Generative Artificial Intelligence** 
 
 ---
 
-## 📋 Prerequisites
+##  Prerequisites
 
 ### Required Software
 
@@ -109,7 +109,7 @@ This project explores the application of **Generative Artificial Intelligence** 
 
 ---
 
-## 🚀 Quick Installation
+##  Quick Installation
 
 ### Step 1: Clone the Repository
 
@@ -139,18 +139,7 @@ nmap --version
 ### Step 4: Install Python Dependencies
 
 ```powershell
-# Offensive Module (with RAG support)
-cd Attaque_LLM
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-
-# IDS Module
-cd ..\IDS_LLM
-pip install requests
-
-# Orchestrator (Interface_web)
-cd ..\Interface_web\orchestrator
+# Install project-wide dependencies
 pip install -r requirements.txt
 ```
 
@@ -163,11 +152,11 @@ npm install
 
 ---
 
-## 🎓 Tutorial: Getting Started
+##  Tutorial: Getting Started
 
 This guide provides step-by-step instructions for using each module of the project.
 
-### 📘 Scenario 1: Generate an Exploit (CLI Mode)
+###  Scenario 1: Generate an Exploit (CLI Mode)
 
 **Goal**: Generate an exploitation script for the Heartbleed vulnerability (CVE-2014-0160).
 
@@ -187,15 +176,15 @@ python main.py
 #### 3. Follow the Interactive Workflow
 ```text
 ============================================================
-🔐 CVE Exploit Script Generator
-⚠️  Educational and Ethical Use Only
+ CVE Exploit Script Generator
+  Educational and Ethical Use Only
 ============================================================
 
 Target CVE (e.g., CVE-2014-0160): CVE-2014-0160
 
 Target IP Address (e.g., 192.168.1.10): 192.168.56.101
 
-🎯 Mode: Direct Heartbleed Detection with Nmap
+ Mode: Direct Heartbleed Detection with Nmap
 
 Scan Options:
   1. Auto-detect SSL/TLS ports (Recommended)
@@ -206,7 +195,7 @@ Selection (1/2, Enter=1): 1
 
 #### 4. Select LLM Model
 ```text
-📋 Available Models (2):
+ Available Models (2):
    1. mistral:latest
    2. codestral:latest
 
@@ -216,12 +205,12 @@ Select a model (number or name, Enter for 1st): 2
 #### 5. Retrieve Generated Script
 The script is automatically saved in `Attaque_LLM/scripts/`:
 ```text
-✅ Script saved: scripts/exploit_CVE_2014_0160_20251127_143022.py
+ Script saved: scripts/exploit_CVE_2014_0160_20251127_143022.py
 ```
 
 ---
 
-### 📗 Scenario 2: Generate IDS Rules (CLI Mode)
+###  Scenario 2: Generate IDS Rules (CLI Mode)
 
 **Goal**: Create Suricata rules to detect Heartbleed exploitation attempts.
 
@@ -234,20 +223,20 @@ python main.py
 #### 2. Follow the Workflow
 ```text
 ============================================================
-🔐 IDS Rule Script Generator
+ IDS Rule Script Generator
 ============================================================
 
 CVE to defend (e.g., CVE-2014-0160): CVE-2014-0160
 
-📋 Available Models (2):
+ Available Models (2):
    1. mistral:latest
    2. codestral:latest
 
 Select a model: 1
 
-🔄 Generating IDS rules for CVE-2014-0160...
+ Generating IDS rules for CVE-2014-0160...
 
-✅ Script saved: ./IDS_LLM/scripts/ids_CVE_2014_0160_20251127_144500.txt
+ Script saved: ./IDS_LLM/scripts/ids_CVE_2014_0160_20251127_144500.txt
 ```
 
 #### 3. Integrate with Suricata (Optional)
@@ -258,7 +247,7 @@ sudo suricatasc -c reload-rules
 
 ---
 
-### 📙 Scenario 3: Using the Web Interface (Orchestrated Mode)
+###  Scenario 3: Using the Web Interface (Orchestrated Mode)
 
 **Goal**: Manage offensive and defensive generation via the graphical interface.
 
@@ -279,7 +268,7 @@ The application will open automatically at `http://localhost:3000`.
 
 #### 3. Create a Scenario
 1. **Enter CVE**: Input `CVE-2021-44228` (Log4Shell).
-2. **Enable RAG**: Check "🔍 Use RAG" for context enrichment.
+2. **Enable RAG**: Check " Use RAG" for context enrichment.
 3. **Generate**: Click "Generate Script & IDS Rules".
 
 #### 4. Refine with LLM Feedback
@@ -299,7 +288,7 @@ If the generated scripts require adjustment:
 
 ---
 
-### 📕 Scenario 4: Using RAG (Contextual Enrichment)
+###  Scenario 4: Using RAG (Contextual Enrichment)
 
 **Goal**: Improve exploit quality using NVD data.
 
@@ -311,11 +300,11 @@ cd Attaque_LLM
 python -c "from rag_engine import initialize_knowledge_base; initialize_knowledge_base()"
 ```
 ```text
-🔄 Initializing RAG (Data Ingestion)...
-📂 Reading and ingesting CVE_info_rag/nvdcve-2.0-2025.json...
-📄 15,234 CVEs found
-🧠 Vectorizing 45,000 documents (this may take time)...
-✅ Knowledge base created and saved.
+ Initializing RAG (Data Ingestion)...
+ Reading and ingesting CVE_info_rag/nvdcve-2.0-2025.json...
+ 15,234 CVEs found
+ Vectorizing 45,000 documents (this may take time)...
+ Knowledge base created and saved.
 ```
 
 #### 2. Test Retrieval
@@ -331,41 +320,41 @@ When using `llm_generator_rag.py`, NVD context is automatically injected into th
 
 ---
 
-## 📦 Module Details
+##  Module Details
 
-### 🔴 Attaque_LLM - Exploit Generation
+###  Attaque_LLM - Exploit Generation
 
 **Features:**
-- ✅ Python exploit generation via LLM (Ollama).
-- ✅ Automatic Nmap scanning for vulnerable ports.
-- ✅ Auto-detection of SSL/TLS ports.
-- ✅ Support for 8+ major CVEs with NSE scripts.
-- ✅ RAG for contextual enrichment (ChromaDB).
-- ✅ REST API for orchestrator integration.
+-  Python exploit generation via LLM (Ollama).
+-  Automatic Nmap scanning for vulnerable ports.
+-  Auto-detection of SSL/TLS ports.
+-  Support for 8+ major CVEs with NSE scripts.
+-  RAG for contextual enrichment (ChromaDB).
+-  REST API for orchestrator integration.
 
 **Supported CVEs:**
 
 | CVE | Vulnerability | Ports | NSE Script |
 | :--- | :--- | :--- | :--- |
-| CVE-2014-0160 | Heartbleed | SSL/TLS auto | ssl-heartbleed ✅ |
-| CVE-2017-0144 | EternalBlue | 445, 139 | smb-vuln-ms17-010 ✅ |
+| CVE-2014-0160 | Heartbleed | SSL/TLS auto | ssl-heartbleed  |
+| CVE-2017-0144 | EternalBlue | 445, 139 | smb-vuln-ms17-010  |
 | CVE-2021-44228 | Log4Shell | 8080, 443 | - |
-| CVE-2017-5638 | Apache Struts | 8080, 80 | http-vuln-cve2017-5638 ✅ |
-| CVE-2019-0708 | BlueKeep | 3389 | rdp-vuln-ms12-020 ✅ |
-| CVE-2014-6271 | Shellshock | 80, 443 | http-shellshock ✅ |
+| CVE-2017-5638 | Apache Struts | 8080, 80 | http-vuln-cve2017-5638  |
+| CVE-2019-0708 | BlueKeep | 3389 | rdp-vuln-ms12-020  |
+| CVE-2014-6271 | Shellshock | 80, 443 | http-shellshock  |
 
-➡️ [Full Documentation](./Attaque_LLM/README.md)
+ [Full Documentation](./Attaque_LLM/README.md)
 
 ---
 
-### 🛡️ IDS_LLM - IDS Rule Generation
+###  IDS_LLM - IDS Rule Generation
 
 **Features:**
-- ✅ Suricata rule generation via LLM.
-- ✅ Multi-model Ollama support.
-- ✅ Generic rules covering exploitation variants.
-- ✅ Automatic explanatory comments.
-- ✅ Compatible with any CVE.
+-  Suricata rule generation via LLM.
+-  Multi-model Ollama support.
+-  Generic rules covering exploitation variants.
+-  Automatic explanatory comments.
+-  Compatible with any CVE.
 
 **Output Format:**
 ```suricata
@@ -379,21 +368,21 @@ alert tls any any -> any any (
 )
 ```
 
-➡️ [Full Documentation](./IDS_LLM/README.md)
+ [Full Documentation](./IDS_LLM/README.md)
 
 ---
 
-### 🌐 Interface_web - Orchestrator
+###  Interface_web - Orchestrator
 
 **Features:**
-- ✅ Modern React interface (Dark Mode).
-- ✅ FastAPI Backend with REST API.
-- ✅ Scenario creation and management.
-- ✅ Coupled attack/defense generation.
-- ✅ Feedback loop for LLM refinement.
-- ✅ Automated code quality evaluation.
-- ✅ Execution simulation (Mock).
-- ✅ Integrated RAG option.
+-  Modern React interface (Dark Mode).
+-  FastAPI Backend with REST API.
+-  Scenario creation and management.
+-  Coupled attack/defense generation.
+-  Feedback loop for LLM refinement.
+-  Automated code quality evaluation.
+-  Execution simulation (Mock).
+-  Integrated RAG option.
 
 **API Endpoints:**
 
@@ -407,11 +396,11 @@ alert tls any any -> any any (
 | PUT | `/scenarios/{id}/override` | Manual override |
 | POST | `/runs/{id}/execute` | Execute simulation |
 
-➡️ [Full Documentation](./Interface_web/README.md)
+ [Full Documentation](./Interface_web/README.md)
 
 ---
 
-## 🔧 Technology Stack
+##  Technology Stack
 
 | Category | Technologies |
 | :--- | :--- |
@@ -424,11 +413,11 @@ alert tls any any -> any any (
 
 ---
 
-## 🔧 Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
-#### ❌ "Unable to connect to Ollama"
+####  "Unable to connect to Ollama"
 ```powershell
 # Verify Ollama is running
 ollama serve
@@ -437,13 +426,13 @@ ollama serve
 ollama list
 ```
 
-#### ❌ "Model not found"
+####  "Model not found"
 ```powershell
 ollama pull mistral
 ollama pull codestral
 ```
 
-#### ❌ "Nmap not found"
+####  "Nmap not found"
 ```powershell
 # Install Nmap
 winget install Insecure.Nmap
@@ -452,19 +441,19 @@ winget install Insecure.Nmap
 nmap --version
 ```
 
-#### ❌ "RAG Error: module not found"
+####  "RAG Error: module not found"
 ```powershell
 pip install langchain-huggingface langchain-chroma langchain-core
 ```
 
-#### ❌ "Frontend does not start"
+####  "Frontend does not start"
 ```powershell
 cd Interface_web\frontend
 npm install
 npm start
 ```
 
-#### ❌ "CORS error on API"
+####  "CORS error on API"
 Ensure the backend is running on port 8000:
 ```powershell
 uvicorn app.main:app --reload --port 8000
@@ -472,21 +461,21 @@ uvicorn app.main:app --reload --port 8000
 
 ---
 
-## ⚖️ Ethical Considerations
+##  Ethical Considerations
 
-### ⚠️ Important Warning
+###  Important Warning
 
 This project was developed strictly for **educational purposes** to understand attack and defense mechanisms in cybersecurity.
 
 ### Usage Guidelines
 
-✅ **AUTHORIZED**:
+ **AUTHORIZED**:
 - Controlled environments (VMs, isolated labs).
 - Academic research.
 - Security training.
 - Testing on systems with explicit written permission.
 
-❌ **PROHIBITED**:
+ **PROHIBITED**:
 - Attacks on systems without authorization.
 - Malicious use.
 - Distribution for illegal purposes.
@@ -494,7 +483,7 @@ This project was developed strictly for **educational purposes** to understand a
 
 ---
 
-## 🔗 Resources
+##  Resources
 
 ### Artificial Intelligence
 - [Ollama](https://ollama.ai/) - Local LLM Server
@@ -509,13 +498,13 @@ This project was developed strictly for **educational purposes** to understand a
 - [Suricata](https://suricata.io/)
 
 ### Module Documentation
-- [📕 Attaque_LLM](./Attaque_LLM/README.md)
-- [📗 IDS_LLM](./IDS_LLM/README.md)
-- [📘 Interface_web](./Interface_web/README.md)
+- [ Attaque_LLM](./Attaque_LLM/README.md)
+- [ IDS_LLM](./IDS_LLM/README.md)
+- [ Interface_web](./Interface_web/README.md)
 
 ---
 
-## 👥 Team
+##  Team
 
 **Group 52** - Class of 2025  
 Applied Research Project (PRAPP)

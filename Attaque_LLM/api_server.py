@@ -88,7 +88,7 @@ def generate_exploit(request: ExploitRequest):
         
         # Si RAG activé, utiliser le générateur avec RAG
         if request.use_rag:
-            print(f"🔍 Mode RAG activé pour {request.cve_id}")
+            print(f" Mode RAG activé pour {request.cve_id}")
             script_content = generate_exploit_script_rag(
                 cve=request.cve_id,
                 target_ip=request.target_ip,
@@ -428,20 +428,20 @@ def _clean_markdown(content: str) -> str:
 # ==================== Démarrage ====================
 
 if __name__ == "__main__":
-    print("🚀 Démarrage de l'API CVE Exploit Generator v2.0")
-    print("📍 URL: http://0.0.0.0:8001")
-    print("📚 Documentation: http://0.0.0.0:8001/docs")
+    print(" Démarrage de l'API CVE Exploit Generator v2.0")
+    print(" URL: http://0.0.0.0:8001")
+    print(" Documentation: http://0.0.0.0:8001/docs")
     print()
-    print("🆕 Nouvelles fonctionnalités:")
+    print(" Nouvelles fonctionnalités:")
     print("   - Support des instructions LLM personnalisées")
     print("   - Endpoint /generate/refine pour le raffinement itératif")
     print()
     
     # Vérifier Ollama au démarrage
     if check_ollama_connection():
-        print("✅ Ollama est accessible")
+        print(" Ollama est accessible")
     else:
-        print("⚠️  ATTENTION: Ollama n'est pas accessible !")
+        print("  ATTENTION: Ollama n'est pas accessible !")
         print("   Lancez 'ollama serve' avant d'utiliser l'API")
     
     uvicorn.run(app, host="0.0.0.0", port=8001)

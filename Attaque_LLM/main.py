@@ -27,12 +27,12 @@ def select_port_from_scan(scan_results: dict, cve: str) -> int:
         int: Port sélectionné
     """
     if not scan_results or len(scan_results) == 0:
-        print("\n⚠️  Aucun port ouvert détecté. Voulez-vous continuer quand même?")
+        print("\n  Aucun port ouvert détecté. Voulez-vous continuer quand même?")
         manual_port = input("   Entrez un port manuellement (ou Entrée pour annuler): ").strip()
         if manual_port.isdigit():
             return int(manual_port)
         else:
-            print("❌ Abandon")
+            print(" Abandon")
             exit(0)
     
     # Filtrer les ports vulnérables
@@ -43,11 +43,11 @@ def select_port_from_scan(scan_results: dict, cve: str) -> int:
     
     # Si des ports vulnérables sont détectés, les prioriser
     if vulnerable_ports:
-        print(f"\n🔴 {len(vulnerable_ports)} port(s) VULNÉRABLE(S) détecté(s) !")
+        print(f"\n {len(vulnerable_ports)} port(s) VULNÉRABLE(S) détecté(s) !")
         
         if len(vulnerable_ports) == 1:
             selected_port = list(vulnerable_ports.keys())[0]
-            print(f"✅ Port vulnérable sélectionné automatiquement: {selected_port}")
+            print(f" Port vulnérable sélectionné automatiquement: {selected_port}")
             return selected_port
         else:
             print("\nPlusieurs ports vulnérables détectés. Lequel voulez-vous exploiter?")
@@ -65,7 +65,7 @@ def select_port_from_scan(scan_results: dict, cve: str) -> int:
                 else:
                     return int(choice)
             except ValueError:
-                print("⚠️  Choix invalide, utilisation du premier port vulnérable")
+                print("  Choix invalide, utilisation du premier port vulnérable")
                 return list(vulnerable_ports.keys())[0]
     
     # Si aucun port vulnérable mais des ports ouverts
@@ -73,13 +73,13 @@ def select_port_from_scan(scan_results: dict, cve: str) -> int:
         selected_port = list(scan_results.keys())[0]
         vuln_status = scan_results[selected_port].get('vulnerable')
         if vuln_status is False:
-            print(f"\n🟢 Port {selected_port} ouvert mais NON vulnérable selon le script NSE")
+            print(f"\n Port {selected_port} ouvert mais NON vulnérable selon le script NSE")
             confirm = input("Voulez-vous continuer quand même? (o/N): ").strip().lower()
             if confirm not in ['o', 'oui', 'y', 'yes']:
-                print("❌ Abandon")
+                print(" Abandon")
                 exit(0)
         else:
-            print(f"\n✅ Port automatiquement sélectionné: {selected_port}")
+            print(f"\n Port automatiquement sélectionné: {selected_port}")
         return selected_port
     else:
         # Proposer de choisir parmi les ports ouverts
@@ -87,7 +87,7 @@ def select_port_from_scan(scan_results: dict, cve: str) -> int:
         for idx, (port, info) in enumerate(scan_results.items(), 1):
             vuln_marker = ""
             if info.get('vulnerable') is False:
-                vuln_marker = " - 🟢 Non vulnérable"
+                vuln_marker = " -  Non vulnérable"
             print(f"   {idx}. Port {port} ({info['service']}){vuln_marker}")
         
         choice = input("Votre choix (numéro ou port): ").strip()
@@ -101,15 +101,15 @@ def select_port_from_scan(scan_results: dict, cve: str) -> int:
             else:
                 return int(choice)
         except ValueError:
-            print("⚠️  Choix invalide, utilisation du premier port détecté")
+            print("  Choix invalide, utilisation du premier port détecté")
             return list(scan_results.keys())[0]
 
 
 def main():
     """Programme principal"""
     print("=" * 60)
-    print("🔐 Générateur de Scripts d'Exploitation CVE")
-    print("⚠️  Usage éducatif et éthique uniquement")
+    print(" Générateur de Scripts d'Exploitation CVE")
+    print("  Usage éducatif et éthique uniquement")
     print("=" * 60)
     print()
     
@@ -126,14 +126,14 @@ def main():
     ip = input("Adresse IP de la cible (ex: 192.168.1.10): ").strip()
     
     if not ip:
-        print("❌ Adresse IP requise")
+        print(" Adresse IP requise")
         exit(1)
     
     selected_port = None
     
     # Mode Heartbleed direct (scan sans base de données)
     if is_heartbleed(cve):
-        print(f"\n🎯 Mode: Détection Heartbleed directe avec Nmap")
+        print(f"\n Mode: Détection Heartbleed directe avec Nmap")
         
         # Demander si l'utilisateur veut spécifier des ports ou détecter automatiquement
         print("\nOptions de scan:")
@@ -150,7 +150,7 @@ def main():
                 try:
                     ports_to_scan = [int(p.strip()) for p in ports_input.split(',')]
                 except ValueError:
-                    print("⚠️  Format invalide, utilisation de la détection automatique")
+                    print("  Format invalide, utilisation de la détection automatique")
                     ports_to_scan = None
         
         # Scanner avec Heartbleed (détection auto si ports_to_scan est None)
@@ -159,14 +159,14 @@ def main():
     
     # Mode avec base de données CVE
     elif cve_info := get_cve_info(cve):
-        print(f"\n📋 CVE détectée: {cve_info['service']}")
+        print(f"\n CVE détectée: {cve_info['service']}")
         print(f"   Ports typiques: {', '.join(map(str, cve_info['ports']))}")
         
         if cve_info.get('nse_script'):
             print(f"   Script NSE: {cve_info['nse_script']}")
         
         # Demander si l'utilisateur veut scanner
-        scan_choice = input("\n🔍 Voulez-vous scanner ces ports avec Nmap? (o/N): ").strip().lower()
+        scan_choice = input("\n Voulez-vous scanner ces ports avec Nmap? (o/N): ").strip().lower()
         
         if scan_choice in ['o', 'oui', 'y', 'yes']:
             scan_results = scan_ports_nmap(
@@ -186,23 +186,23 @@ def main():
     
     # CVE inconnue
     else:
-        print(f"\n⚠️  CVE {cve} non reconnue dans la base de données")
+        print(f"\n  CVE {cve} non reconnue dans la base de données")
         manual_port = input("Port de la cible (ex: 80): ").strip()
         if manual_port.isdigit():
             selected_port = int(manual_port)
         else:
-            print("❌ Port invalide")
+            print(" Port invalide")
             exit(1)
     
     # Afficher la cible
-    print(f"\n🎯 Cible: {ip}:{selected_port}")
+    print(f"\n Cible: {ip}:{selected_port}")
     
     # Récupérer les modèles Ollama disponibles
-    print("\n🔍 Récupération des modèles Ollama disponibles...")
+    print("\n Récupération des modèles Ollama disponibles...")
     available_models = get_available_models()
     
     if available_models:
-        print(f"\n📋 Modèles disponibles ({len(available_models)}):")
+        print(f"\n Modèles disponibles ({len(available_models)}):")
         for idx, model in enumerate(available_models, 1):
             print(f"   {idx}. {model}")
         
@@ -217,7 +217,7 @@ def main():
                 model_name = available_models[choice_idx - 1]
                 print(f"Modèle sélectionné: {model_name}")
             else:
-                print(f"⚠️  Choix invalide, utilisation du premier modèle: {available_models[0]}")
+                print(f"  Choix invalide, utilisation du premier modèle: {available_models[0]}")
                 model_name = available_models[0]
         else:
             # Vérifier si le nom existe
@@ -225,10 +225,10 @@ def main():
                 model_name = model_choice
                 print(f"Modèle sélectionné: {model_name}")
             else:
-                print(f"⚠️  Modèle '{model_choice}' non trouvé, utilisation de: {available_models[0]}")
+                print(f"  Modèle '{model_choice}' non trouvé, utilisation de: {available_models[0]}")
                 model_name = available_models[0]
     else:
-        print("\n⚠️  Aucun modèle Ollama détecté. Assurez-vous qu'Ollama est lancé.")
+        print("\n  Aucun modèle Ollama détecté. Assurez-vous qu'Ollama est lancé.")
         model_name = input("Entrez le nom du modèle à utiliser (ex: codestral): ").strip()
         if not model_name:
             model_name = "codestral"
@@ -239,14 +239,14 @@ def main():
     
     if script_content:
         print("\n" + "=" * 60)
-        print("📝 Script généré")
+        print(" Script généré")
         print("=" * 60)
         
         # Sauvegarder le script
         filepath = save_script(cve, script_content, ip, selected_port)
-        print(f"\n✅ Script sauvegardé: {filepath}")
+        print(f"\n Script sauvegardé: {filepath}")
     else:
-        print("\n❌ Échec de la génération du script.")
+        print("\n Échec de la génération du script.")
 
 
 if __name__ == "__main__":

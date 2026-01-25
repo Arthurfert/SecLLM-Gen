@@ -1,4 +1,4 @@
-# 🎓 Tutoriel Complet - PRAPP Groupe 52
+#  Tutoriel Complet - PRAPP Groupe 52
 
 ## Introduction
 
@@ -10,7 +10,7 @@ Ce tutoriel vous guide pas à pas dans l'utilisation du projet **IA & Cybersécu
 
 ---
 
-## 📑 Sommaire
+##  Sommaire
 
 1. [Préparation de l'environnement](#1-préparation-de-lenvironnement)
 2. [Premier exploit avec Attaque_LLM](#2-premier-exploit-avec-attaque_llm)
@@ -66,7 +66,7 @@ Nmap version 7.94 ( https://nmap.org )
 
 ### 1.3 Préparer une cible de test
 
-⚠️ **Important** : N'utilisez JAMAIS ce projet sur des systèmes non autorisés.
+ **Important** : N'utilisez JAMAIS ce projet sur des systèmes non autorisés.
 
 Options recommandées :
 - **Metasploitable 2** : VM vulnérable pour tests
@@ -82,8 +82,10 @@ Pour ce tutoriel, nous utiliserons l'IP fictive `192.168.56.101`.
 ### 2.1 Lancer le module
 
 ```powershell
+cd ..
+# Install consolidated dependencies
+pip install -r requirements.txt
 cd Attaque_LLM
-.\venv\Scripts\Activate.ps1
 python main.py
 ```
 
@@ -93,15 +95,15 @@ Suivez les étapes interactives :
 
 ```
 ============================================================
-🔐 Générateur de Scripts d'Exploitation CVE
-⚠️  Usage éducatif et éthique uniquement
+ Générateur de Scripts d'Exploitation CVE
+  Usage éducatif et éthique uniquement
 ============================================================
 
 CVE à exploiter (ex: CVE-2014-0160): CVE-2014-0160
 
 Adresse IP de la cible (ex: 192.168.1.10): 192.168.56.101
 
-🎯 Mode: Détection Heartbleed directe avec Nmap
+ Mode: Détection Heartbleed directe avec Nmap
 
 Options de scan:
   1. Détection automatique des ports SSL/TLS (recommandé)
@@ -113,28 +115,28 @@ Votre choix (1/2, Entrée=1): 1
 Le système scanne automatiquement les ports SSL/TLS :
 
 ```
-🔍 Détection des ports SSL/TLS sur 192.168.56.101...
+ Détection des ports SSL/TLS sur 192.168.56.101...
    Plage de ports: 1-10000
-   ✓ Port SSL/TLS détecté: 443 (https)
-   ✓ Port SSL/TLS détecté: 8443 (ssl/http)
+    Port SSL/TLS détecté: 443 (https)
+    Port SSL/TLS détecté: 8443 (ssl/http)
 
-✅ 2 port(s) SSL/TLS détectés: 443, 8443
+ 2 port(s) SSL/TLS détectés: 443, 8443
 
-🔍 Test Heartbleed sur 192.168.56.101...
+ Test Heartbleed sur 192.168.56.101...
    Ports testés: 443, 8443
    Script NSE: ssl-heartbleed
 
-✅ Ports ouverts détectés:
-   • Port 443: https (open) 🔴 VULNÉRABLE
+ Ports ouverts détectés:
+   • Port 443: https (open)  VULNÉRABLE
 
-🔴 1 port(s) VULNÉRABLE(S) détecté(s) !
-✅ Port vulnérable sélectionné automatiquement: 443
+ 1 port(s) VULNÉRABLE(S) détecté(s) !
+ Port vulnérable sélectionné automatiquement: 443
 ```
 
 Sélectionnez le modèle LLM :
 
 ```
-📋 Modèles disponibles (2):
+ Modèles disponibles (2):
    1. mistral:latest
    2. codestral:latest
 
@@ -145,13 +147,13 @@ Modèle sélectionné: codestral:latest
 Le LLM génère le script :
 
 ```
-🔄 Génération du script d'exploitation pour CVE-2014-0160...
+ Génération du script d'exploitation pour CVE-2014-0160...
 
 ============================================================
-📝 Script généré
+ Script généré
 ============================================================
 
-✅ Script sauvegardé: scripts/exploit_CVE_2014_0160_20251127_143022.py
+ Script sauvegardé: scripts/exploit_CVE_2014_0160_20251127_143022.py
 ```
 
 ### 2.3 Examiner le script généré
@@ -191,24 +193,24 @@ python main.py
 
 ```
 ============================================================
-🔐 Générateur de Scripts de règles IDS
+ Générateur de Scripts de règles IDS
 ============================================================
 
 CVE à défendre (ex: CVE-2014-0160): CVE-2014-0160
 
-📋 Modèles disponibles (2):
+ Modèles disponibles (2):
    1. mistral:latest
    2. codestral:latest
 
 Choisissez un modèle: 1
 
-🔄 Génération des règles IDS pour CVE-2014-0160...
+ Génération des règles IDS pour CVE-2014-0160...
 
 ============================================================
-📝 Script généré
+ Script généré
 ============================================================
 
-✅ Script sauvegardé: ./IDS_LLM/scripts/ids_CVE_2014_0160_20251127_150000.txt
+ Script sauvegardé: ./IDS_LLM/scripts/ids_CVE_2014_0160_20251127_150000.txt
 ```
 
 ### 3.3 Examiner les règles générées
@@ -296,7 +298,7 @@ L'interface s'ouvre sur `http://localhost:3000`
    Cible un serveur Minecraft vulnérable.
    Utilise un payload LDAP.
    ```
-3. **RAG** : Cochez ✅ "Utiliser le RAG"
+3. **RAG** : Cochez  "Utiliser le RAG"
 4. Cliquez sur **"Générer script & règles IDS"**
 
 #### Étape 2 : Examiner les résultats
@@ -356,19 +358,19 @@ Script d'Attaque: 82/100
 Règles IDS: 74/100
 
 Feedback Attaque:
-- ✅ Bonne gestion des variantes d'injection
-- ⚠️ Manque de timeout sur les requêtes
-- ⚠️ Pas de vérification SSL
+-  Bonne gestion des variantes d'injection
+-  Manque de timeout sur les requêtes
+-  Pas de vérification SSL
 
 Feedback IDS:
-- ✅ Détection des payloads basiques
-- ⚠️ Variantes encodées non couvertes
-- ⚠️ Risque de faux positifs sur "jndi"
+-  Détection des payloads basiques
+-  Variantes encodées non couvertes
+-  Risque de faux positifs sur "jndi"
 ```
 
 #### Étape 5 : Valider et exécuter
 
-1. Cochez ☑️ les deux validations humaines
+1. Cochez  les deux validations humaines
 2. Cliquez sur **"Exécuter la simulation sur le lab"**
 
 Résultat (mock) :
@@ -421,14 +423,14 @@ Le processus :
 4. Stocke dans ChromaDB
 
 ```
-🔄 Initialisation du RAG (Ingestion des données)...
-📂 Lecture de nvdcve-2.0-2025.json...
-📄 15234 CVEs trouvées
-📂 Lecture de nvdcve-2.0-2024.json...
-📄 28456 CVEs trouvées
+ Initialisation du RAG (Ingestion des données)...
+ Lecture de nvdcve-2.0-2025.json...
+ 15234 CVEs trouvées
+ Lecture de nvdcve-2.0-2024.json...
+ 28456 CVEs trouvées
 ...
-🧠 Vectorisation de 85000 documents (patience)...
-✅ Base de connaissances créée et sauvegardée.
+ Vectorisation de 85000 documents (patience)...
+ Base de connaissances créée et sauvegardée.
 ```
 
 ### 5.3 Tester la recherche RAG
@@ -539,8 +541,8 @@ Créez un rapport avec :
 sudo tail -f /var/log/suricata/fast.log | grep HEARTBLEED
 ```
 
-Si l'exploit est détecté → Les règles IDS sont efficaces ✅
-Si non détecté → Affiner les règles avec feedback LLM ⚠️
+Si l'exploit est détecté → Les règles IDS sont efficaces 
+Si non détecté → Affiner les règles avec feedback LLM 
 
 ---
 
@@ -548,7 +550,7 @@ Si non détecté → Affiner les règles avec feedback LLM ⚠️
 
 ### 7.1 Sécurité
 
-| ✅ À faire | ❌ À éviter |
+|  À faire |  À éviter |
 |-----------|------------|
 | Utiliser des VMs isolées | Tester sur des systèmes de production |
 | Documenter tous les tests | Oublier de logger les actions |
@@ -557,7 +559,7 @@ Si non détecté → Affiner les règles avec feedback LLM ⚠️
 
 ### 7.2 Qualité des scripts
 
-| ✅ Bonnes pratiques | Explication |
+|  Bonnes pratiques | Explication |
 |---------------------|-------------|
 | Vérifier la syntaxe | `python -m py_compile script.py` |
 | Tester dans un sandbox | VM dédiée aux tests |
@@ -584,7 +586,7 @@ Si non détecté → Affiner les règles avec feedback LLM ⚠️
 
 ---
 
-## 🎯 Exercices
+##  Exercices
 
 ### Exercice 1 : Heartbleed complet
 1. Générez un exploit pour CVE-2014-0160
@@ -605,7 +607,7 @@ Si non détecté → Affiner les règles avec feedback LLM ⚠️
 
 ---
 
-## 📚 Ressources supplémentaires
+##  Ressources supplémentaires
 
 - [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
 - [CVE Details](https://www.cvedetails.com/)
